@@ -1,5 +1,5 @@
 import "../css/pagination.scss";
-import classnames from 'classnames';
+import classnames from "classnames";
 //I have used this classnames component to define the css styling on the current page Number in pagination
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
@@ -23,10 +23,9 @@ function Pagination({
     currentPage,
     totalCount,
     pageSize,
-    siblingCount
-    
+    siblingCount,
   });
-// I have written some comments for better clarification
+  // I have written some comments for better clarification
   const onNext = () => {
     onPageChange(currentPage + 1);
   };
@@ -46,7 +45,6 @@ function Pagination({
       aria-label="Blog post pagination list"
     >
       <li className="paginationItem">
-       
         <button
           type="button"
           className="arrowButton left"
@@ -54,7 +52,7 @@ function Pagination({
           aria-label="Goto previous page"
           onClick={onPrevious}
           //If user at the beginning of the results, the previous button should be disabled
-         disabled={currentPage===1} // change this line to disable a button.
+          disabled={currentPage === 1} // change this line to disable a button.
         >
           <ChevronLeftIcon />
         </button>
@@ -75,21 +73,18 @@ function Pagination({
           <li
             key={key}
             className="paginationItem"
-            aria-current="true" // change this line to highlight a current page.
-  
+            aria-current="page" // change this line to highlight a current page.
           >
             <button
               type="button"
-             
               // Do not remove the aria-label below, it is used for Hatchways automation.
               aria-label={`Goto page ${pageNumber}`}
               //here is what i was talking about(CSS Styling on the current page Number)
-              className={classnames('', {
-                selected: pageNumber === currentPage
+              className={classnames("", {
+                selected: pageNumber === currentPage,
               })}
-            
               onClick={() => onPageChange(pageNumber)}
-              
+               
             >
               {pageNumber}
             </button>
@@ -105,7 +100,8 @@ function Pagination({
           aria-label="Goto next page"
           onClick={onNext}
           //If user at the end of the results, the next button should be disabled
-          disabled={currentPage===lastPage}// change this line to disable a button.
+          disabled={currentPage === lastPage} // change this line to disable a button.
+          aria-current="page2"
         >
           <ChevronRightIcon />
         </button>
@@ -119,10 +115,7 @@ function Pagination({
         //When user changes “X per page” (the only options will be 15, 25, 50 and 100), it should only display at maximum that amount of blogs per page and the first page is displayed
         onChange={(e) => {
           onPageSizeOptionChange(e.target.value);
-         
         }}
-       
-
       >
         {pageSizeOptions.map((size) => (
           <option key={size} defaultValue={pageSize === size} value={size}>

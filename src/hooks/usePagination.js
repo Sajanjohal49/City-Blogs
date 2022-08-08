@@ -6,21 +6,21 @@ const range = (start, end) => {
   return Array.from({ length }, (_, item) => item + start);
 };
 
-function usePagination({ totalCount,
+function usePagination({
+  totalCount,
   pageSize,
   siblingCount = 1,
-  currentPage}) {
-  
-  
-    const paginationRange = useMemo(() => {
-      const totalPageCount = Math.ceil(totalCount / pageSize);
-  
-      const totalPageNumbers = siblingCount + 5;
+  currentPage,
+}) {
+  const paginationRange = useMemo(() => {
+    const totalPageCount = Math.ceil(totalCount / pageSize);
 
-      if (totalPageNumbers >= totalPageCount) {
-        return range(1, totalPageCount);
-      }
-      const leftSiblingIndex = Math.max(currentPage - siblingCount, 1);
+    const totalPageNumbers = siblingCount + 5;
+
+    if (totalPageNumbers >= totalPageCount) {
+      return range(1, totalPageCount);
+    }
+    const leftSiblingIndex = Math.max(currentPage - siblingCount, 1);
     const rightSiblingIndex = Math.min(
       currentPage + siblingCount,
       totalPageCount
@@ -32,13 +32,12 @@ function usePagination({ totalCount,
     const lastPageIndex = totalPageCount;
     if (!shouldShowLeftDots && shouldShowRightDots) {
       let leftItemCount = 3 + 2 * siblingCount;
-     
+
       let leftRange = range(1, leftItemCount);
 
       return [...leftRange, DOTS, totalPageCount];
     }
     if (shouldShowLeftDots && !shouldShowRightDots) {
-      
       let rightItemCount = 3 + 2 * siblingCount;
       let rightRange = range(
         totalPageCount - rightItemCount + 1,
@@ -47,7 +46,7 @@ function usePagination({ totalCount,
       return [firstPageIndex, DOTS, ...rightRange];
     }
     if (shouldShowLeftDots && shouldShowRightDots) {
-  //Here are the two siblings together
+      //Here are the two siblings together
       let middleRange = range(leftSiblingIndex, rightSiblingIndex);
       return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
     }
@@ -60,7 +59,6 @@ function usePagination({ totalCount,
    Then, I have created left and right index variable by using Math.min() and Math.max() function .
    Lastly, I have utilized those variables to work condtitonally and after that combine them into the last step.
   */
-  
 }
 
 export default usePagination;

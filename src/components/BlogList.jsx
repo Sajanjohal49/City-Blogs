@@ -8,18 +8,20 @@ const PAGE_SIZES = [15, 25, 50, 100];
 
 function BlogList() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage,setPostsPerPage] = useState(15);
+  const [postsPerPage, setPostsPerPage] = useState(15);
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPaginationData = blogs.posts.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPaginationData = blogs.posts.slice(
+    indexOfFirstPost,
+    indexOfLastPost
+  );
 
   const updateRowsPerPage = (totalPageNumber) => {
-    setPostsPerPage(totalPageNumber)
-    console.log(postsPerPage)
+    setPostsPerPage(totalPageNumber);
+    console.log(postsPerPage);
   };
   const updatePage = (pageNumber) => {
-    setCurrentPage(pageNumber)
-    
+    setCurrentPage(pageNumber);
   };
 
   return (
