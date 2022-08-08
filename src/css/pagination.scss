@@ -20,6 +20,9 @@
         background-color: rgba(159, 159, 159, 0.295);
         cursor: pointer;
       }
+      &.selected {
+        background-color: rgba(246, 81, 40, 0.729);
+      }
 
       &:disabled {
         pointer-events: none;

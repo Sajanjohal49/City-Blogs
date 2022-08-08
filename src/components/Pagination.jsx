@@ -1,4 +1,6 @@
 import "../css/pagination.scss";
+import classnames from 'classnames';
+//I have used this classnames component to define the css styling on the current page Number in pagination
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
 import usePagination, { DOTS } from "../hooks/usePagination";
@@ -12,15 +14,19 @@ function Pagination({
   onPageSizeOptionChange,
   totalCount,
   currentPage,
+  siblingCount = 1,
   pageSize,
+  postPerPage,
   pageSizeOptions,
 }) {
   const paginationRange = usePagination({
     currentPage,
     totalCount,
     pageSize,
+    siblingCount
+    
   });
-
+// I have written some comments for better clarification
   const onNext = () => {
     onPageChange(currentPage + 1);
   };
@@ -28,7 +34,11 @@ function Pagination({
   const onPrevious = () => {
     onPageChange(currentPage - 1);
   };
-
+  //If the first and last page is the same, then previous and next arrow buttons are disabled
+  if (currentPage === 0 || paginationRange.length < 2) {
+    return null;
+  }
+  let lastPage = paginationRange[paginationRange.length - 1];
   return (
     <ul
       className="wrapper"
@@ -36,13 +46,15 @@ function Pagination({
       aria-label="Blog post pagination list"
     >
       <li className="paginationItem">
+       
         <button
           type="button"
           className="arrowButton left"
           // Do not remove the aria-label below, it is used for Hatchways automation.
           aria-label="Goto previous page"
           onClick={onPrevious}
-          disabled={false} // change this line to disable a button.
+          //If user at the beginning of the results, the previous button should be disabled
+         disabled={currentPage===1} // change this line to disable a button.
         >
           <ChevronLeftIcon />
         </button>
@@ -63,13 +75,21 @@ function Pagination({
           <li
             key={key}
             className="paginationItem"
-            aria-current="false" // change this line to highlight a current page.
+            aria-current="true" // change this line to highlight a current page.
+  
           >
             <button
               type="button"
+             
               // Do not remove the aria-label below, it is used for Hatchways automation.
               aria-label={`Goto page ${pageNumber}`}
+              //here is what i was talking about(CSS Styling on the current page Number)
+              className={classnames('', {
+                selected: pageNumber === currentPage
+              })}
+            
               onClick={() => onPageChange(pageNumber)}
+              
             >
               {pageNumber}
             </button>
@@ -84,7 +104,8 @@ function Pagination({
           // Do not remove the aria-label below, it is used for Hatchways automation.
           aria-label="Goto next page"
           onClick={onNext}
-          disabled={false} // change this line to disable a button.
+          //If user at the end of the results, the next button should be disabled
+          disabled={currentPage===lastPage}// change this line to disable a button.
         >
           <ChevronRightIcon />
         </button>
@@ -94,10 +115,14 @@ function Pagination({
         className="paginationSelector"
         // Do not remove the aria-label below, it is used for Hatchways automation.
         aria-label="Select page size"
-        value={pageSize}
+        value={postPerPage}
+        //When user changes “X per page” (the only options will be 15, 25, 50 and 100), it should only display at maximum that amount of blogs per page and the first page is displayed
         onChange={(e) => {
           onPageSizeOptionChange(e.target.value);
+         
         }}
+       
+
       >
         {pageSizeOptions.map((size) => (
           <option key={size} defaultValue={pageSize === size} value={size}>
