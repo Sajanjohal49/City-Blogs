@@ -3,7 +3,7 @@ import React from "react";
 import SearchInput from "./Search";
 import "../css/navbar.scss";
 
-function Navbar( ) {
+function Navbar() {
   return (
     <div className="navbarWrapper">
       <h1 className="title">Hatchways Times</h1>
