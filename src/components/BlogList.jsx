@@ -36,7 +36,7 @@ function BlogList() {
         onPageSizeOptionChange={updateRowsPerPage}
       />
       <ul
-        // Do not remove the aria-label below, it is used for Hatchways automation.
+        // Do not remove the aria-label below, it is used for City automation.
         aria-label="blog list"
       >
         {currentPaginationData.map((blog) => (

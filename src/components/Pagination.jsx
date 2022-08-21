@@ -41,14 +41,14 @@ function Pagination({
   return (
     <ul
       className="wrapper"
-      // Do not remove the aria-label below, it is used for Hatchways automation.
+      // Do not remove the aria-label below, it is used for City automation.
       aria-label="Blog post pagination list"
     >
       <li className="paginationItem">
         <button
           type="button"
           className="arrowButton left"
-          // Do not remove the aria-label below, it is used for Hatchways automation.
+          // Do not remove the aria-label below, it is used for City automation.
           aria-label="Goto previous page"
           onClick={onPrevious}
           //If user at the beginning of the results, the previous button should be disabled
@@ -77,7 +77,7 @@ function Pagination({
           >
             <button
               type="button"
-              // Do not remove the aria-label below, it is used for Hatchways automation.
+              // Do not remove the aria-label below, it is used for City automation.
               aria-label={`Goto page ${pageNumber}`}
               //here is what i was talking about(CSS Styling on the current page Number)
               className={classnames("", {
@@ -96,7 +96,7 @@ function Pagination({
         <button
           type="button"
           className="arrowButton right"
-          // Do not remove the aria-label below, it is used for Hatchways automation.
+          // Do not remove the aria-label below, it is used for City automation.
           aria-label="Goto next page"
           onClick={onNext}
           //If user at the end of the results, the next button should be disabled
@@ -109,7 +109,7 @@ function Pagination({
 
       <select
         className="paginationSelector"
-        // Do not remove the aria-label below, it is used for Hatchways automation.
+        // Do not remove the aria-label below, it is used for City automation.
         aria-label="Select page size"
         value={postPerPage}
         //When user changes “X per page” (the only options will be 15, 25, 50 and 100), it should only display at maximum that amount of blogs per page and the first page is displayed
